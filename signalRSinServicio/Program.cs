@@ -101,7 +101,9 @@ public class MyHub : Hub
 #if DEBUG // Solo se compila en modo Debug o pruebas
         return _connectedClients.TryGetValue(guid, out var connectionId) ? connectionId : null;
 #else
-        throw new InvalidOperationException("Esta función no está disponible en producción.");
+    //    return ("Esta función no está disponible en producción.");
+        return _connectedClients.TryGetValue(guid, out var connectionId) ? connectionId : null;
+
 #endif
     }
     public override Task OnDisconnectedAsync(Exception? exception)
