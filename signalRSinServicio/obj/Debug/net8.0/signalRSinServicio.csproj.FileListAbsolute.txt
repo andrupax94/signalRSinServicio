@@ -41,4 +41,4 @@ E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Debug\net8.0\refint\sign
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Debug\net8.0\signalRSinServicio.pdb
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Debug\net8.0\signalRSinServicio.genruntimeconfig.cache
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Debug\net8.0\ref\signalRSinServicio.dll
-E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Debug\net8.0\signalRSinServicio.sourcelink.json

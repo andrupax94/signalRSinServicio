@@ -32,7 +32,7 @@ public class Program
                     .AllowAnyMethod()
                     .AllowCredentials();
             });
-            });
+        });
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAll",
@@ -51,9 +51,9 @@ public class Program
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
-            app.UseCors("AllowAll");
-            //app.UseCors();
-            app.UseHttpsRedirection();
+        // app.UseCors("AllowAll");
+        app.UseCors();
+        app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
