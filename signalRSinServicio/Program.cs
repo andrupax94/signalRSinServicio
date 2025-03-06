@@ -13,9 +13,14 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        var options = new WebApplicationOptions
+        {
+            ContentRootPath = Directory.GetCurrentDirectory()
+        };
 
-        // Add services to the container
+        var builder = WebApplication.CreateBuilder(options);
+
+        // Configuración del servicio
         builder.Services.AddRazorPages();
         builder.Services.AddSignalR();
         builder.Services.AddCors(options =>
@@ -23,7 +28,6 @@ public class Program
             options.AddDefaultPolicy(builder =>
             {
                 builder.WithOrigins(
-
                         "https://test1.example.com",
                         "https://localhost:7296",
                         "https://blazorclient-gdd2ese0aebrd7b3.canadacentral-01.azurewebsites.net",
@@ -43,15 +47,15 @@ public class Program
                           .AllowAnyHeader();
                 });
         });
+
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline
+        // Configuración del pipeline de solicitud HTTP
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
-        // app.UseCors("AllowAll");
         app.UseCors();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
@@ -65,7 +69,6 @@ public class Program
         app.Run();
     }
 }
-
 public class MyHub : Hub
 {
     private readonly ILogger<MyHub> _logger;
