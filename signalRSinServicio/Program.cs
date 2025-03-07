@@ -56,7 +56,8 @@ public class Program
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
-        app.UseCors();
+        app.UseCors("AllowAll");
+        //app.UseCors();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();

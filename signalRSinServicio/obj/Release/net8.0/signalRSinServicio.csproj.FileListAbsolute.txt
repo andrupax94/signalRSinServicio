@@ -42,3 +42,4 @@ E:\MAUI\repos\signalRSinServicio\signalRSinServicio\bin\Release\net8.0\Newtonsof
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\bin\Release\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Release\net8.0\signalRSinServicio.csproj.AssemblyReference.cache
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Release\net8.0\signalRS.EB5E4AAE.Up2Date
+E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Release\net8.0\signalRSinServicio.sourcelink.json
