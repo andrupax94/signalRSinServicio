@@ -14,11 +14,11 @@ steps:
     
     buildVersionToDownload: specific
     buildType: specific
-    specificBuildNumber: '1960'
+    specificBuildWithTriggering: false
     targetPath: '$(Pipeline.Workspace)\PublishedApp'
     project: SignalRWebsocket
     pipeline: SignalR Pull,Build and Test
-    pipelineId: 0
+    pipelineId: 1960
     artifactName: PublishedApp
 # Publica los archivos al servidor FTP
 - task: FtpUpload@2
