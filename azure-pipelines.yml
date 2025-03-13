@@ -10,39 +10,20 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-# Inicia el repositorio y los submódulos
-- checkout: self
-  submodules: true
 
-# Instala NuGet
-- task: NuGetToolInstaller@1
-
-# Restaura las dependencias
-- task: NuGetCommand@2
+- task: ExtractFiles@1
   inputs:
-    restoreSolution: '$(solution)'
+    archiveFilePatterns: '$(Build.ArtifactStagingDirectory)\WebApp.zip'
+    destinationFolder: '$(Build.ArtifactStagingDirectory)\extracted'
+    cleanDestinationFolder: true
 
-# Construye la solución
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-# Ejecuta las pruebas
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-# Sube los archivos al servidor FTP
+# Subir los archivos extraídos al servidor FTPS
 - task: FtpUpload@2
   inputs:
     credentialsOption: 'inputs'
     serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net/site/wwwroot'
     username: 'serviciointermedio\$serviciointermedio'
     password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
-    rootDirectory: '$(Build.ArtifactStagingDirectory)'
+    rootDirectory: '$(Build.ArtifactStagingDirectory)\extracted'
     remoteDirectory: '/site/wwwroot'
     trustSSL: true
