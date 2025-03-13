@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "signalRSinServicio", "signa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "test\Test.csproj", "{8F77AB7A-7B26-4CDF-B828-47ADE2C89EBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "misFunciones", "..\misFunciones\misFunciones\misFunciones.csproj", "{9316874E-0C71-409F-9EDC-AB7294FA9925}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "misFunciones", "misFunciones\misFunciones\misFunciones.csproj", "{9316874E-0C71-409F-9EDC-AB7294FA9925}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
