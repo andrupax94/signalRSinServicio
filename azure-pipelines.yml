@@ -31,4 +31,9 @@ steps:
     configuration: '$(buildConfiguration)'
 
 # Publica los artefactos para que otro pipeline los use
-
+- task: PublishPipelineArtifact@1
+  inputs:
+    
+    targetPath: '$(Build.ArtifactStagingDirectory)\published'
+    artifact: 'PublishedApp'
+    publishLocation: 'pipeline'
