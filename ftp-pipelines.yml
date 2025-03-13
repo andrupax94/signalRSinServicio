@@ -12,7 +12,6 @@ steps:
 # Descarga el artefacto del último build
 - task: DownloadPipelineArtifact@1
   inputs:
-  
     buildType: specific
     buildVersionToDownload: latest
     artifactName: 'PublishedApp'
