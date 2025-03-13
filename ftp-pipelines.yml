@@ -11,6 +11,8 @@ variables:
 steps:
 - task: DownloadPipelineArtifact@1
   inputs:
+    buildVersionToDownload: latestFromBranch
+    buildType: current
     targetPath: '$(Pipeline.Workspace)\published'
     project: SignalRWebsocket
     pipeline: SignalR Pull,Build and Test
