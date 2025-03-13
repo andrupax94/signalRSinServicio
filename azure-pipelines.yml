@@ -8,8 +8,6 @@ variables:
   solution: '**/signalRSinServicio.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  publishProfile: 'FTPProfile.pubxml'
-  FTP_PASSWORD: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
 
 steps:
 # Inicia el repositorio y los submódulos
@@ -24,19 +22,17 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-# Publica la solución usando el perfil de publicación
+# Compila y publica la solución en una carpeta local
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:PublishUrl=$(Build.ArtifactStagingDirectory)\published'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-- task: FtpUpload@2
+
+# Publica los artefactos para que otro pipeline los use
+- task: PublishPipelineArtifact@1
   inputs:
-    credentialsOption: 'inputs'
-    serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
-    username: 'serviciointermedio\$serviciointermedio'
-    password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi' # Usa una variable secreta en lugar de exponer la contraseña
-    rootDirectory: '$(Build.ArtifactStagingDirectory)\published'
-    remoteDirectory: '/site/wwwroot'
-    trustSSL: true
+    targetPath: '$(Build.ArtifactStagingDirectory)\published'
+    artifact: 'PublishedApp'
+    publishLocation: 'pipeline'
