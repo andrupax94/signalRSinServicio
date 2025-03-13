@@ -13,7 +13,7 @@ steps:
 - task: DownloadPipelineArtifact@2
   inputs:
     artifactName: 'PublishedApp'
-    targetPath: '$(Pipeline.Workspace)\PublishedApp'
+    targetPath: '$(Pipeline.Workspace)\published'
 
 # Publica los archivos al servidor FTP
 - task: FtpUpload@2
