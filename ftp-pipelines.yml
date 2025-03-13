@@ -1,25 +1,31 @@
 trigger: none
 
-resources:
-  pipelines:
-    - pipeline: buildPipeline  # Referencia al primer pipeline
-      source: 'andrupax94.signalRSinServicio' # Nombre del primer pipeline
-      trigger: true
 
 variables:
   FTP_SERVER: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
   FTP_USERNAME: 'serviciointermedio\$serviciointermedio'
   remoteDirectory: '/site/wwwroot'
-  lastBuildId: $[resources.pipelines.buildPipeline.outputs['setVars.lastBuildId']]
-  lastBuildId2: $[resources.pipelines.buildPipeline.outputs['lastBuildId']] # Obtiene el ID del último build del primer pipeline
+ 
 
 pool:
   vmImage: 'windows-latest'
 
 steps:
 
-- script: echo "Última ejecución del pipeline fuente = $(lastBuildId)---$(lastBuildId2)"
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifact: 'BuildInfo'
+    path: '$(Pipeline.Workspace)/BuildInfo'
+  displayName: 'Descargar BuildInfo'
 
+- powershell: |
+    $buildId = Get-Content "$(Pipeline.Workspace)/BuildInfo/build_number.txt"
+    echo "El número de build es: $buildId"
+    echo "##vso[task.setvariable variable=SharedBuildId]$buildId"
+  displayName: 'Leer número de Build y guardarlo como variable'
+
+- script: echo "Usando Build ID $(SharedBuildId)"
+  displayName: 'Usar variable en otro paso'
 
 # Descarga el artefacto del último build del primer pipeline
 - task: DownloadPipelineArtifact@2 
