@@ -37,3 +37,6 @@ steps:
     artifact: 'PublishedApp'
     publishLocation: 'pipeline'
 
+- powershell: |
+    Write-Host "##vso[task.setvariable variable=lastBuildId;isOutput=true]$(Build.BuildId)"
+  displayName: 'Guardar ID del último build'
