@@ -38,5 +38,14 @@ steps:
     publishLocation: 'pipeline'
 
 - script: echo "esta la build $(Build.BuildId)"
-- script: echo "##vso[task.setvariable variable=lastBuildId;isOutput=true]$(Build.BuildId)"
-  name: setVars
+
+- powershell: |
+    echo "idbuild=$(Build.BuildId)" > $(Build.ArtifactStagingDirectory)\variables.env
+  displayName: 'Crear archivo de variables'
+
+# Publicar el archivo como artefacto
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)\variables.env'
+    artifact: 'numeroBuild'
+    publishLocation: 'pipeline'
