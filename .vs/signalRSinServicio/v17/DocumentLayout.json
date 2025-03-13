@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{18D7268C-73E9-457A-9AD8-823BD6205751}|signalRSinServicio\\signalRSinServicio.csproj|solutionrelative:signalrsinservicio\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18D7268C-73E9-457A-9AD8-823BD6205751}|signalRSinServicio\\signalRSinServicio.csproj|e:\\maui\\repos\\signalrsinservicio\\signalrsinservicio\\signalrsinservicio.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{18D7268C-73E9-457A-9AD8-823BD6205751}|signalRSinServicio\\signalRSinServicio.csproj|solutionrelative:signalrsinservicio\\signalrsinservicio.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{18D7268C-73E9-457A-9AD8-823BD6205751}|signalRSinServicio\\signalRSinServicio.csproj|e:\\maui\\repos\\signalrsinservicio\\signalrsinservicio\\servicios\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18D7268C-73E9-457A-9AD8-823BD6205751}|signalRSinServicio\\signalRSinServicio.csproj|solutionrelative:signalrsinservicio\\servicios\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8F77AB7A-7B26-4CDF-B828-47ADE2C89EBE}|test\\Test.csproj|e:\\maui\\repos\\signalrsinservicio\\test\\test.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{8F77AB7A-7B26-4CDF-B828-47ADE2C89EBE}|test\\Test.csproj|solutionrelative:test\\test.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{18D7268C-73E9-457A-9AD8-823BD6205751}|signalRSinServicio\\signalRSinServicio.csproj|e:\\maui\\repos\\signalrsinservicio\\signalrsinservicio\\servicios\\sqliteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18D7268C-73E9-457A-9AD8-823BD6205751}|signalRSinServicio\\signalRSinServicio.csproj|solutionrelative:signalrsinservicio\\servicios\\sqliteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,27 +30,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Test.csproj",
-              "DocumentMoniker": "E:\\MAUI\\repos\\signalRSinServicio\\test\\Test.csproj",
-              "RelativeDocumentMoniker": "test\\Test.csproj",
-              "ToolTip": "E:\\MAUI\\repos\\signalRSinServicio\\test\\Test.csproj",
-              "RelativeToolTip": "test\\Test.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-28T08:48:04.886Z"
+              "DocumentIndex": 1,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "E:\\MAUI\\repos\\signalRSinServicio\\signalRSinServicio\\Servicios\\TokenService.cs",
+              "RelativeDocumentMoniker": "signalRSinServicio\\Servicios\\TokenService.cs",
+              "ToolTip": "E:\\MAUI\\repos\\signalRSinServicio\\signalRSinServicio\\Servicios\\TokenService.cs",
+              "RelativeToolTip": "signalRSinServicio\\Servicios\\TokenService.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAkwAgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T13:48:51.262Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "signalRSinServicio.csproj",
-              "DocumentMoniker": "E:\\MAUI\\repos\\signalRSinServicio\\signalRSinServicio\\signalRSinServicio.csproj",
-              "RelativeDocumentMoniker": "signalRSinServicio\\signalRSinServicio.csproj",
-              "ToolTip": "E:\\MAUI\\repos\\signalRSinServicio\\signalRSinServicio\\signalRSinServicio.csproj",
-              "RelativeToolTip": "signalRSinServicio\\signalRSinServicio.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-24T08:43:47.773Z"
+              "DocumentIndex": 2,
+              "Title": "SqliteService.cs",
+              "DocumentMoniker": "E:\\MAUI\\repos\\signalRSinServicio\\signalRSinServicio\\Servicios\\SqliteService.cs",
+              "RelativeDocumentMoniker": "signalRSinServicio\\Servicios\\SqliteService.cs",
+              "ToolTip": "E:\\MAUI\\repos\\signalRSinServicio\\signalRSinServicio\\Servicios\\SqliteService.cs",
+              "RelativeToolTip": "signalRSinServicio\\Servicios\\SqliteService.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAAA7wJoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T10:10:30.192Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -60,7 +62,7 @@
               "RelativeDocumentMoniker": "signalRSinServicio\\Program.cs",
               "ToolTip": "E:\\MAUI\\repos\\signalRSinServicio\\signalRSinServicio\\Program.cs",
               "RelativeToolTip": "signalRSinServicio\\Program.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAgwDsAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAowF0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T12:26:37.806Z",
               "EditorCaption": ""

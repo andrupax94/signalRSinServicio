@@ -1,13 +1,11 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 public class Program
 {
@@ -37,6 +35,7 @@ public class Program
                     .AllowCredentials();
             });
         });
+
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAll",
@@ -48,6 +47,26 @@ public class Program
                 });
         });
 
+        // Configuración de autenticación JWT
+        var key = Encoding.ASCII.GetBytes("tu-clave-secreta-super-segura");
+        builder.Services.AddAuthentication(x =>
+        {
+            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(x =>
+        {
+            x.RequireHttpsMetadata = false;
+            x.SaveToken = true;
+            x.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            };
+        });
+
         var app = builder.Build();
 
         // Configuración del pipeline de solicitud HTTP
@@ -57,82 +76,103 @@ public class Program
             app.UseHsts();
         }
         app.UseCors("AllowAll");
-        //app.UseCors();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
+
+        // Agregar middleware de autenticación y autorización
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapRazorPages();
         app.MapHub<MyHub>("/chatHub");
-        app.MapGet("/", () => Results.Content("<html><body><h1>Bienvenido</h1></body></html>", "text/html"));
 
         app.Run();
     }
 }
+
+
 public class MyHub : Hub
-{
-    private readonly ILogger<MyHub> _logger;
-    public static Dictionary<string, string> _connectedClients = new();
-
-    public MyHub(ILogger<MyHub> logger)
     {
-        _logger = logger;
-    }
-
-    public override Task OnConnectedAsync()
-    {
-        _logger.LogInformation("Cliente conectado: {ConnectionId}", Context.ConnectionId);
-
-        var httpContext = Context.GetHttpContext();
-        var guid = httpContext.Request.Query["guid"].ToString();
-        if (string.IsNullOrEmpty(guid))
+        private readonly ILogger<MyHub> _logger;
+        public static Dictionary<string, string> _connectedClients = new();
+        public static Dictionary<string, string> _clientsWithGuid = new();
+        public MyHub(ILogger<MyHub> logger)
         {
-            guid = Context.ConnectionId;
+            _logger = logger;
         }
 
-        // Asocia el GUID con el ConnectionId y almacénalo en _connectedClients
-        _connectedClients[guid] = Context.ConnectionId;
-
-        return base.OnConnectedAsync();
-    }
-
-    public string? GetConnectionIdByGuid(string guid)
-    {
-#if DEBUG // Solo se compila en modo Debug o pruebas
-        return _connectedClients.TryGetValue(guid, out var connectionId) ? connectionId : null;
-#else
-    //    return ("Esta función no está disponible en producción.");
-        return _connectedClients.TryGetValue(guid, out var connectionId) ? connectionId : null;
-
-#endif
-    }
-    public override Task OnDisconnectedAsync(Exception? exception)
-    {
-        _logger.LogInformation("Cliente desconectado: {ConnectionId}", Context.ConnectionId);
-
-        // Encuentra el GUID asociado con el ConnectionId y elimínalo del diccionario
-        var guid = _connectedClients.FirstOrDefault(x => x.Value == Context.ConnectionId).Key;
-        if (guid != null)
+        public override Task OnConnectedAsync()
         {
-            _connectedClients.Remove(guid);
+            _logger.LogInformation("Cliente conectado: {ConnectionId}", Context.ConnectionId);
+
+            var httpContext = Context.GetHttpContext();
+            var guid = httpContext.Request.Query["guid"].ToString();
+            if (string.IsNullOrEmpty(guid))
+            {
+                guid = Context.ConnectionId;
+            }
+            else
+            {
+                _clientsWithGuid[Context.ConnectionId] = guid;
+            }
+
+            // Asocia el GUID con el ConnectionId y almacénalo en _connectedClients
+            _connectedClients[guid] = Context.ConnectionId;
+
+            return base.OnConnectedAsync();
         }
 
-        return base.OnDisconnectedAsync(exception);
+        public string? GetConnectionIdByGuid(string guid)
+        {
+
+            return _connectedClients.TryGetValue(guid, out var connectionId) ? connectionId : null;
+
+        }
+        public List<string> GetOtherConnectedClientsGuids()
+        {
+            var currentConnectionId = Context.ConnectionId;
+            var currentGuid = _clientsWithGuid.ContainsKey(currentConnectionId) ? _clientsWithGuid[currentConnectionId] : null;
+
+            return _clientsWithGuid
+                .Where(x => x.Value != currentGuid)
+                .Select(x => x.Value)
+                .ToList();
+
+        }
+        public override Task OnDisconnectedAsync(Exception? exception)
+        {
+            _logger.LogInformation("Cliente desconectado: {ConnectionId}", Context.ConnectionId);
+
+            // Encuentra el GUID asociado con el ConnectionId y elimínalo del diccionario
+            var conectionId = _connectedClients.FirstOrDefault(x => x.Value == Context.ConnectionId).Key;
+            var guid = _clientsWithGuid.FirstOrDefault(x => x.Key == Context.ConnectionId).Key;
+            if (conectionId != null)
+            {
+                _connectedClients.Remove(conectionId);
+                if (guid != null)
+                {
+                    _clientsWithGuid.Remove(guid);
+                }
+            }
+
+            return base.OnDisconnectedAsync(exception);
+        }
+
+        public async Task SendMessageToClient(string guid, string message)
+        {
+            if (_connectedClients.TryGetValue(guid, out var targetConnectionId))
+            {
+                _logger.LogInformation("Enviando mensaje de {Sender} a {Receiver}: {Message}",
+                    Context.ConnectionId, targetConnectionId, message);
+
+                await Clients.Client(targetConnectionId).SendAsync("ReceiveMessage", Context.ConnectionId, message);
+            }
+            else
+            {
+                await Clients.Client(Context.ConnectionId).SendAsync("ReceiveMessage", Context.ConnectionId, misFunciones.Mensajes.GenerateMessaje("El Cliente Destino No esta Conectado"));
+                _logger.LogWarning("Intento de envío fallido: {Target} no está conectado", guid);
+            }
+        }
     }
 
-    public async Task SendMessageToClient(string guid, string message)
-    {
-        if (_connectedClients.TryGetValue(guid, out var targetConnectionId))
-        {
-            _logger.LogInformation("Enviando mensaje de {Sender} a {Receiver}: {Message}",
-                Context.ConnectionId, targetConnectionId, message);
-
-            await Clients.Client(targetConnectionId).SendAsync("ReceiveMessage", message);
-        }
-        else
-        {
-            _logger.LogWarning("Intento de envío fallido: {Target} no está conectado", guid);
-        }
-    }
-}
