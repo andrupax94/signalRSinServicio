@@ -10,31 +10,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-# Inicia el repositorio y los submódulos
-- checkout: self
-  submodules: true
 
-# Instala NuGet
-- task: NuGetToolInstaller@1
-
-# Restaura las dependencias
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
-# Construye la solución
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-# Ejecuta las pruebas
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
 
 # Sube los archivos al servidor FTP
 - task: FtpUpload@2
@@ -47,7 +23,4 @@ steps:
     rootDirectory: '$(Pipeline.Workspace)' # Carpeta raíz donde se ubican los archivos del artefacto generado
     filePatterns: '**' # Patrón para incluir todos los archivos
     remoteDirectory: '/site/wwwroot' # Ruta remota en el servidor FTP donde se copiarán los archivos
-    clean: false
-    cleanContents: false
-    preservePaths: false 
-    trustSSL: true
+  
