@@ -12,9 +12,8 @@ steps:
 # Descarga el artefacto del último build
 - task: DownloadPipelineArtifact@2
   inputs:
-    buildVersionToDownload: specific
+    buildVersionToDownload: latest
     artifactName: 'PublishedApp'
-    specificBuildNumber: '1950'
     targetPath: '$(Pipeline.Workspace)\s\published'
 
 # Publica los archivos al servidor FTP
