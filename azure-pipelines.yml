@@ -28,7 +28,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:PublishUrl=$(Build.ArtifactStagingDirectory)\published /p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:PublishUrl=$(Build.ArtifactStagingDirectory)\published'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 - task: FtpUpload@2
