@@ -3319,6 +3319,16 @@
           "build/net6.0/xunit.runner.visualstudio.props": {}
         }
       },
+      "misFunciones/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/misFunciones.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/misFunciones.dll": {}
+        }
+      },
       "signalRSinServicio/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -3328,7 +3338,8 @@
           "Microsoft.Data.Sqlite": "9.0.3",
           "SQLitePCLRaw.bundle_sqlcipher": "1.1.14",
           "System.IdentityModel.Tokens.Jwt": "8.6.1",
-          "System.Security.Cryptography.Algorithms": "4.3.1"
+          "System.Security.Cryptography.Algorithms": "4.3.1",
+          "misFunciones": "1.0.0"
         },
         "compile": {
           "bin/placeholder/signalRSinServicio.dll": {}
@@ -9048,6 +9059,11 @@
         "xunit.runner.visualstudio.3.0.2.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "misFunciones/1.0.0": {
+      "type": "project",
+      "path": "../misFunciones/misFunciones/misFunciones.csproj",
+      "msbuildProject": "../misFunciones/misFunciones/misFunciones.csproj"
     },
     "signalRSinServicio/1.0.0": {
       "type": "project",

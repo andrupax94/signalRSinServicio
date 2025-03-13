@@ -2327,6 +2327,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "misFunciones/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/misFunciones.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/misFunciones.dll": {}
+        }
       }
     }
   },
@@ -6777,6 +6787,11 @@
         "system.xml.xdocument.4.0.11.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "misFunciones/1.0.0": {
+      "type": "project",
+      "path": "../misFunciones/misFunciones/misFunciones.csproj",
+      "msbuildProject": "../misFunciones/misFunciones/misFunciones.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6786,7 +6801,8 @@
       "Microsoft.Data.Sqlite >= 9.0.3",
       "SQLitePCLRaw.bundle_sqlcipher >= 1.1.14",
       "System.IdentityModel.Tokens.Jwt >= 8.6.1",
-      "System.Security.Cryptography.Algorithms >= 4.3.1"
+      "System.Security.Cryptography.Algorithms >= 4.3.1",
+      "misFunciones >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -6821,7 +6837,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\MAUI\\repos\\signalRSinServicio\\misFunciones\\misFunciones\\misFunciones.csproj": {
+              "projectPath": "E:\\MAUI\\repos\\signalRSinServicio\\misFunciones\\misFunciones\\misFunciones.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -16,10 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="misFunciones">
-      <HintPath>..\..\misFunciones\misFunciones\bin\Debug\net8.0\misFunciones.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <ProjectReference Include="..\misFunciones\misFunciones\misFunciones.csproj" />
   </ItemGroup>
 
 </Project>
