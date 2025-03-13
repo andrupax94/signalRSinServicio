@@ -40,14 +40,14 @@ steps:
 - task: FtpUpload@2
   inputs:
     credentialsOption: 'inputs'
-    serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net/site/wwwroot'
+    serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
     username: 'serviciointermedio\$serviciointermedio'
     password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
     implicitFTPS: true
     rootDirectory: '$(Pipeline.Workspace)' # Carpeta raíz donde se ubican los archivos del artefacto generado
     filePatterns: '**' # Patrón para incluir todos los archivos
-    remoteDirectory: '/' # Ruta remota en el servidor FTP donde se copiarán los archivos
+    remoteDirectory: '/site/wwwroot' # Ruta remota en el servidor FTP donde se copiarán los archivos
     clean: false
     cleanContents: false
-    preservePaths: true # Mantiene la estructura de directorios
+    preservePaths: false 
     trustSSL: true
