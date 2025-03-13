@@ -8,6 +8,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  publishProfile: 'FTPProfile.pubxml' # Cambia esto por tu perfil .pubxml
 
 steps:
 # Inicia el repositorio y los submódulos
@@ -17,38 +18,15 @@ steps:
 # Instala NuGet
 - task: NuGetToolInstaller@1
 
-# Restaura las dependencias
+# Restaura las dependencias del proyecto
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
 
-# Construye la solución
+# Publica la solución usando el perfil de publicación
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    msbuildArgs: '/p:DeployOnBuild=true /p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform) /p:PublishProfile=$(publishProfile)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
-# Ejecuta las pruebas
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: ExtractFiles@1
-  inputs:
-    archiveFilePatterns: '$(Build.ArtifactStagingDirectory)\WebApp.zip'
-    destinationFolder: '$(Build.ArtifactStagingDirectory)\extracted'
-    cleanDestinationFolder: true
-
-# Subir los archivos extraídos al servidor FTPS
-- task: FtpUpload@2
-  inputs:
-    credentialsOption: 'inputs'
-    serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net/site/wwwroot'
-    username: 'serviciointermedio\$serviciointermedio'
-    password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
-    rootDirectory: '$(Build.ArtifactStagingDirectory)\extracted'
-    remoteDirectory: '/'
-    trustSSL: true
