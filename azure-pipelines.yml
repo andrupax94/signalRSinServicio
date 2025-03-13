@@ -39,13 +39,11 @@ steps:
 
 - script: echo "esta la build $(Build.BuildId)"
 
-- powershell: |
-    echo "idbuild=$(Build.BuildId)" > $(Build.ArtifactStagingDirectory)\variables.env
-  displayName: 'Crear archivo de variables'
+- script: echo $(Build.BuildId) > build_number.txt
+  displayName: 'Guardar número de Build en un archivo'
 
-# Publicar el archivo como artefacto
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)\variables.env'
-    artifact: 'numeroBuild'
-    publishLocation: 'pipeline'
+    targetPath: 'build_number.txt'
+    artifact: 'BuildInfo'
+  displayName: 'Publicar BuildInfo como artefacto'
