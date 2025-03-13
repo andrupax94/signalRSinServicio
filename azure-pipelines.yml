@@ -31,12 +31,4 @@ steps:
     configuration: '$(buildConfiguration)'
 
 # Publica los artefactos para que otro pipeline los use
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)\published'
-    artifact: 'PublishedApp'
-    publishLocation: 'pipeline'
-# Configura la variable de salida con el ID del build
-- powershell: |
-    Write-Host "##vso[task.setvariable variable=lastBuildId]$(Build.BuildId)"
-  displayName: 'Guardar ID del último build'
+
