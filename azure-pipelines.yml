@@ -50,5 +50,5 @@ steps:
     username: 'serviciointermedio\$serviciointermedio'
     password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
     rootDirectory: '$(Build.ArtifactStagingDirectory)\extracted'
-    remoteDirectory: '/site/wwwroot'
+    remoteDirectory: '/'
     trustSSL: true
