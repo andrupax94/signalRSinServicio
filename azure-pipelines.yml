@@ -1,8 +1,3 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - main
 
@@ -15,12 +10,19 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+# Inicia el repositorio y los submódulos
+- checkout: self
+  submodules: true
+
+# Instala NuGet
 - task: NuGetToolInstaller@1
 
+# Restaura las dependencias
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
 
+# Construye la solución
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -28,18 +30,19 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+# Ejecuta las pruebas
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-
+# Sube los archivos al servidor FTP
 - task: FtpUpload@2
   inputs:
-    credentialsOption: 'inputs' # O 'serviceEndpoint' si usas una conexión de servicio
+    credentialsOption: 'inputs'
     serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net/site/wwwroot'
     username: 'serviciointermedio\$serviciointermedio'
     password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
     rootDirectory: '/'
     remoteDirectory: 'https://serviciointermedio.azurewebsites.net/'
-    trustSSL: true # Si usas FTPS
+    trustSSL: true
