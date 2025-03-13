@@ -6,13 +6,14 @@ pool:
 variables:
   FTP_SERVER: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
   FTP_USERNAME: 'serviciointermedio\$serviciointermedio'
+  
   remoteDirectory: '/site/wwwroot'
 
 steps:
 # Descarga el artefacto del último build
 - task: DownloadPipelineArtifact@2
   inputs:
-    buildType: 'specific'
+    buildType: specific
     buildVersionToDownload: latest
     specificBuildWithTriggering: false
   
@@ -25,7 +26,7 @@ steps:
     credentialsOption: 'inputs'
     serverUrl: '$(FTP_SERVER)'
     username: '$(FTP_USERNAME)'
-    password: '$(FTP_PASSWORD)' # Variable secreta configurada en Azure DevOps
+    password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi' # Variable secreta configurada en Azure DevOps
     rootDirectory: '$(Pipeline.Workspace)\PublishedApp'
     remoteDirectory: '$(remoteDirectory)'
     trustSSL: true
