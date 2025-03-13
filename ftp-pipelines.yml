@@ -9,12 +9,13 @@ variables:
   remoteDirectory: '/site/wwwroot'
 
 steps:
-- task: PublishPipelineArtifact@1
+- task: DownloadPipelineArtifact@1
   inputs:
-    
-    targetPath: '$(Build.ArtifactStagingDirectory)\published'
-    artifact: 'PublishedApp'
-    publishLocation: 'pipeline'
+    targetPath: '$(Pipeline.Workspace)\published'
+    project: SignalRWebsocket
+    pipeline: SignalR Pull,Build and Test
+    pipelineId: 0
+    artifactName: PublishedApp
 # Publica los archivos al servidor FTP
 - task: FtpUpload@2
   inputs:
