@@ -5,7 +5,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  solution: '**/signalRSinServicio.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   publishProfile: 'FTPProfile.pubxml' # Cambia esto por tu perfil .pubxml
@@ -27,6 +27,6 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform) /p:PublishProfile=$(publishProfile)'
+    msbuildArgs: '/p:DeployOnBuild=true  /p:PublishProfile=$(publishProfile)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
