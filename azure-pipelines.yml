@@ -28,5 +28,15 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:PublishProfile=$(publishProfile) /p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform) /p:Password=$(FTP_PASSWORD)'
-   
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:PublishUrl=$(Build.ArtifactStagingDirectory)\published /p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
+    username: 'serviciointermedio\$serviciointermedio'
+    password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi' # Usa una variable secreta en lugar de exponer la contraseña
+    rootDirectory: '$(Build.ArtifactStagingDirectory)\published'
+    remoteDirectory: '/site/wwwroot'
+    trustSSL: true
