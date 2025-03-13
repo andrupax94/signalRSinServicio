@@ -1,24 +1,31 @@
 trigger: none
 
-pool:
-  vmImage: 'windows-latest'
+resources:
+  pipelines:
+    - pipeline: buildPipeline  # Referencia al primer pipeline
+      source: 'SignalR Pull,Build and Test' # Nombre del primer pipeline
+      trigger: true  # Opcional: Ejecuta automáticamente este pipeline después del primero
 
 variables:
   FTP_SERVER: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
   FTP_USERNAME: 'serviciointermedio\$serviciointermedio'
   remoteDirectory: '/site/wwwroot'
+  lastBuildId: $[resources.pipelines.buildPipeline.runId] # Obtiene el ID del último build del primer pipeline
+
+pool:
+  vmImage: 'windows-latest'
 
 steps:
-- task: DownloadPipelineArtifact@2
-  inputs:
-    
-    buildVersionToDownload: specific
-    buildType: specific
-    specificBuildWithTriggering: false
-    targetPath: '$(Pipeline.Workspace)\PublishedApp'
-    project: SignalRWebsocket
-    pipeline: SignalR Pull,Build and Test
-    pipelineId: 1960
+# Descarga el artefacto del último build del primer pipeline
+- task: DownloadPipelineArtifact@2 
+  inputs: 
+    buildVersionToDownload: specific 
+    buildType: specific 
+    specificBuildWithTriggering: false 
+    targetPath: '$(Pipeline.Workspace)\PublishedApp' 
+    project: SignalRWebsocket 
+    pipeline: SignalR Pull,Build and Test 
+    pipelineId: $(lastBuildId)
     artifactName: PublishedApp
 # Publica los archivos al servidor FTP
 - task: FtpUpload@2
