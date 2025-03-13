@@ -9,11 +9,12 @@ variables:
   remoteDirectory: '/site/wwwroot'
 
 steps:
-- task: DownloadPipelineArtifact@1
+- task: DownloadPipelineArtifact@2
   inputs:
-    buildVersionToDownload: latestFromBranch
-    buildType: current
-    targetPath: '$(Pipeline.Workspace)\published'
+    
+    buildVersionToDownload: specific
+    buildType: specific
+    targetPath: '$(Pipeline.Workspace)'
     project: SignalRWebsocket
     pipeline: SignalR Pull,Build and Test
     pipelineId: 0
