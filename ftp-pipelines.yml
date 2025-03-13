@@ -14,7 +14,8 @@ steps:
     
     buildVersionToDownload: specific
     buildType: specific
-    targetPath: '$(Pipeline.Workspace)'
+    specificBuildNumber: '1960'
+    targetPath: '$(Pipeline.Workspace)\PublishedApp'
     project: SignalRWebsocket
     pipeline: SignalR Pull,Build and Test
     pipelineId: 0
