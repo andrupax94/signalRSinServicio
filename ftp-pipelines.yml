@@ -1,0 +1,27 @@
+trigger: none # Solo lo ejecutas manualmente o desde otro pipeline
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  FTP_SERVER: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
+  FTP_USERNAME: 'serviciointermedio\$serviciointermedio'
+  remoteDirectory: '/site/wwwroot'
+
+steps:
+# Descarga los artefactos publicados por el primer pipeline
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifactName: 'PublishedApp'
+    targetPath: '$(Pipeline.Workspace)\PublishedApp'
+
+# Publica los archivos al servidor FTP
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: '$(FTP_SERVER)'
+    username: '$(FTP_USERNAME)'
+    password: '$(FTP_PASSWORD)' # Debes configurar esta variable como secreta en Azure DevOps
+    rootDirectory: '$(Pipeline.Workspace)\PublishedApp'
+    remoteDirectory: '$(remoteDirectory)'
+    trustSSL: true
