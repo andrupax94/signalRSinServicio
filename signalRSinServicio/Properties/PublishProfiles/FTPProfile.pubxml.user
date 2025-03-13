@@ -7,7 +7,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA0+g9ai8rIk6n8T5JcRWXBAAAAAACAAAAAAAQZgAAAAEAACAAAABM8hxJ5uSRE/R3VvJwqUcyiz47yX0rzWwXXUNZBZTKXAAAAAAOgAAAAAIAACAAAABlCx6px+a0FKIJOkBe172h5MqUX90ATWy5IzKlc77PgIAAAAD/mTJArjdRtZ3pBxssJJ0JcENiXiSO4Hsep1p9FOOHpxKqAmwKsCWe5MHw7+qK1NFZikmKQeqaakj0VSCR+e339OJsbA7E4bSYUCjXO7HlNKFPH2fT6o26pBAx92KZrYCGqCmU03lJnzXSmmhcswwqfNn5mTOVBbAX6l9k6Lr0OUAAAAAs8a6dKh/ncmtvSMTe7St+fyaWmFPsxXv6aUHvAEdjBMfJITb/fJKJbgsa+gwW3KGXg4F/yPva/YBRx7o9mnIo</EncryptedPassword>
     <_PublishTargetUrl>ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net/site/wwwroot/</_PublishTargetUrl>
-    <History>True|2025-03-12T15:23:59.7278799Z||;True|2025-03-12T15:08:46.9678670+00:00||;</History>
+    <History>True|2025-03-13T14:30:03.9495865Z||;False|2025-03-13T14:23:52.9968162+00:00||;True|2025-03-12T15:23:59.7278799+00:00||;True|2025-03-12T15:08:46.9678670+00:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -63,10 +63,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/07/2025 18:51:52</publishTime>
     </File>
     <File Include="misFunciones.dll">
-      <publishTime>03/11/2025 12:17:46</publishTime>
+      <publishTime>03/13/2025 14:21:51</publishTime>
     </File>
     <File Include="misFunciones.pdb">
-      <publishTime>03/11/2025 12:17:46</publishTime>
+      <publishTime>03/13/2025 14:21:51</publishTime>
     </File>
     <File Include="Newtonsoft.Json.dll">
       <publishTime>03/24/2018 17:44:14</publishTime>
@@ -153,19 +153,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>03/02/2019 04:57:38</publishTime>
     </File>
     <File Include="signalRSinServicio.deps.json">
-      <publishTime>03/12/2025 15:15:18</publishTime>
+      <publishTime>03/13/2025 14:24:04</publishTime>
     </File>
     <File Include="signalRSinServicio.dll">
-      <publishTime>03/12/2025 15:15:17</publishTime>
+      <publishTime>03/13/2025 14:24:04</publishTime>
     </File>
     <File Include="signalRSinServicio.exe">
-      <publishTime>03/12/2025 15:15:17</publishTime>
+      <publishTime>03/13/2025 14:24:04</publishTime>
     </File>
     <File Include="signalRSinServicio.pdb">
-      <publishTime>03/12/2025 15:15:17</publishTime>
+      <publishTime>03/13/2025 14:24:04</publishTime>
     </File>
     <File Include="signalRSinServicio.runtimeconfig.json">
-      <publishTime>03/12/2025 14:59:16</publishTime>
+      <publishTime>03/13/2025 14:21:53</publishTime>
     </File>
     <File Include="signalRSinServicio.staticwebassets.endpoints.json">
       <publishTime>02/21/2025 12:31:19</publishTime>
@@ -192,7 +192,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/12/2024 21:47:06</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>03/12/2025 15:15:23</publishTime>
+      <publishTime>03/13/2025 14:24:04</publishTime>
     </File>
     <File Include="wwwroot/css/site.css">
       <publishTime>02/21/2025 12:26:13</publishTime>
