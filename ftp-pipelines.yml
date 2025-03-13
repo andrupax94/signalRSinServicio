@@ -16,6 +16,9 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- powershell: |
+    Write-Host "El ID del último build es: $(lastBuildId)"
+  displayName: 'Mostrar variable lastBuildId'
 # Descarga el artefacto del último build del primer pipeline
 - task: DownloadPipelineArtifact@2 
   inputs: 
