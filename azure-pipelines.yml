@@ -32,3 +32,14 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs' # O 'serviceEndpoint' si usas una conexión de servicio
+    serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net/site/wwwroot'
+    username: 'serviciointermedio\$serviciointermedio'
+    password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
+    rootDirectory: '/'
+    remoteDirectory: 'https://serviciointermedio.azurewebsites.net/'
+    trustSSL: true # Si usas FTPS
