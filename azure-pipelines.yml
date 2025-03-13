@@ -8,7 +8,8 @@ variables:
   solution: '**/signalRSinServicio.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  publishProfile: 'FTPProfile.pubxml' # Cambia esto por tu perfil .pubxml
+  publishProfile: 'FTPProfile.pubxml'
+  FTP_PASSWORD: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
 
 steps:
 # Inicia el repositorio y los submódulos
@@ -27,6 +28,6 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true  /p:PublishProfile=$(publishProfile)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:PublishProfile=$(publishProfile) /p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform) /p:Password=$(FTP_PASSWORD)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
