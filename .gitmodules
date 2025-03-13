@@ -1,0 +1,3 @@
+[submodule "misFunciones"]
+	path = misFunciones
+	url = https://github.com/andrupax94/misFunciones.git
