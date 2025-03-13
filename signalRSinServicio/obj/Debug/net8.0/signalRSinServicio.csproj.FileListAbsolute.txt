@@ -86,3 +86,4 @@ E:\MAUI\repos\signalRSinServicio\signalRSinServicio\bin\Debug\net8.0\Microsoft.I
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 E:\MAUI\repos\signalRSinServicio\signalRSinServicio\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+E:\MAUI\repos\signalRSinServicio\signalRSinServicio\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

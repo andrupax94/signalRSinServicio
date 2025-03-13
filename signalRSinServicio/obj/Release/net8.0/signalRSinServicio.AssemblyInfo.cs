@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("signalRSinServicio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58c0054749cf61e2d9f44e11d0f72f519caa0dbe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f1a5497b803d15ce9cb2680ceff728d8afc1bd1")]
 [assembly: System.Reflection.AssemblyProductAttribute("signalRSinServicio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("signalRSinServicio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

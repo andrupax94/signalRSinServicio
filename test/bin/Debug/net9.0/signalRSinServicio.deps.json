@@ -14,7 +14,7 @@
           "SQLitePCLRaw.bundle_sqlcipher": "1.1.14",
           "System.IdentityModel.Tokens.Jwt": "8.6.1",
           "System.Security.Cryptography.Algorithms": "4.3.1",
-          "misFunciones": "1.0.0.0"
+          "misFunciones": "1.0.0"
         },
         "runtime": {
           "signalRSinServicio.dll": {}
@@ -1259,10 +1259,10 @@
           "System.Xml.ReaderWriter": "4.0.11"
         }
       },
-      "misFunciones/1.0.0.0": {
+      "misFunciones/1.0.0": {
         "runtime": {
           "misFunciones.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -2185,8 +2185,8 @@
       "path": "system.xml.xdocument/4.0.11",
       "hashPath": "system.xml.xdocument.4.0.11.nupkg.sha512"
     },
-    "misFunciones/1.0.0.0": {
-      "type": "reference",
+    "misFunciones/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     }

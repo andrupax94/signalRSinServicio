@@ -2503,6 +2503,17 @@
         }
       },
       "xunit.runner.visualstudio/3.0.2": {},
+      "misFunciones/1.0.0": {
+        "runtime": {
+          "misFunciones.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "misFunciones.dll": {}
+        }
+      },
       "signalRSinServicio/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.14",
@@ -2510,7 +2521,8 @@
           "Microsoft.Data.Sqlite": "9.0.3",
           "SQLitePCLRaw.bundle_sqlcipher": "1.1.14",
           "System.IdentityModel.Tokens.Jwt": "8.6.1",
-          "System.Security.Cryptography.Algorithms": "4.3.1"
+          "System.Security.Cryptography.Algorithms": "4.3.1",
+          "misFunciones": "1.0.0"
         },
         "runtime": {
           "signalRSinServicio.dll": {
@@ -2520,14 +2532,6 @@
         },
         "compile": {
           "signalRSinServicio.dll": {}
-        }
-      },
-      "misFunciones/1.0.0.0": {
-        "runtime": {
-          "misFunciones.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
         }
       },
       "Microsoft.AspNetCore.Antiforgery/9.0.0.0": {
@@ -5357,13 +5361,13 @@
       "path": "xunit.runner.visualstudio/3.0.2",
       "hashPath": "xunit.runner.visualstudio.3.0.2.nupkg.sha512"
     },
-    "signalRSinServicio/1.0.0": {
+    "misFunciones/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "misFunciones/1.0.0.0": {
-      "type": "reference",
+    "signalRSinServicio/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     },
