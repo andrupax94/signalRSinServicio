@@ -3,7 +3,7 @@ trigger: none
 resources:
   pipelines:
     - pipeline: buildPipeline  # Referencia al primer pipeline
-      source: 'SignalR Pull,Build and Test' # Nombre del primer pipeline
+      source: 'andrupax94.signalRSinServicio' # Nombre del primer pipeline
       trigger: true  # Opcional: Ejecuta automáticamente este pipeline después del primero
 
 variables:
@@ -21,7 +21,7 @@ steps:
   displayName: 'Mostrar variable lastBuildId'
 # Descarga el artefacto del último build del primer pipeline
 - task: DownloadPipelineArtifact@2 
-  inputs: 
+  inputs:
     buildVersionToDownload: specific 
     buildType: specific 
     specificBuildWithTriggering: false 
