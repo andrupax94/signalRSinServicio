@@ -10,7 +10,7 @@ variables:
   FTP_SERVER: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
   FTP_USERNAME: 'serviciointermedio\$serviciointermedio'
   remoteDirectory: '/site/wwwroot'
-  lastBuildId: $(resources.pipelines.buildPipeline) # Obtiene el ID del último build del primer pipeline
+  lastBuildId: $[resources.pipelines.buildPipeline.runID] # Obtiene el ID del último build del primer pipeline
 
 pool:
   vmImage: 'windows-latest'
