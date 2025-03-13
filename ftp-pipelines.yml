@@ -9,13 +9,11 @@ variables:
   remoteDirectory: '/site/wwwroot'
 
 steps:
-# Descarga el artefacto del último build
-- task: DownloadPipelineArtifact@2
+- task: PublishPipelineArtifact@1
   inputs:
-    buildVersionToDownload: latest
-    artifactName: 'PublishedApp'
-    targetPath: '$(Pipeline.Workspace)\s\published'
-
+    targetPath: '$(Build.ArtifactStagingDirectory)\published'
+    artifact: 'PublishedApp'
+    publishLocation: 'pipeline'
 # Publica los archivos al servidor FTP
 - task: FtpUpload@2
   inputs:
