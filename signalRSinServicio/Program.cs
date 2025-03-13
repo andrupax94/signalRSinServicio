@@ -75,7 +75,8 @@ public class Program
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
-        app.UseCors("AllowAll");
+        // app.UseCors("AllowAll");
+        app.UseCors();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
@@ -93,86 +94,86 @@ public class Program
 
 
 public class MyHub : Hub
+{
+    private readonly ILogger<MyHub> _logger;
+    public static Dictionary<string, string> _connectedClients = new();
+    public static Dictionary<string, string> _clientsWithGuid = new();
+    public MyHub(ILogger<MyHub> logger)
     {
-        private readonly ILogger<MyHub> _logger;
-        public static Dictionary<string, string> _connectedClients = new();
-        public static Dictionary<string, string> _clientsWithGuid = new();
-        public MyHub(ILogger<MyHub> logger)
+        _logger = logger;
+    }
+
+    public override Task OnConnectedAsync()
+    {
+        _logger.LogInformation("Cliente conectado: {ConnectionId}", Context.ConnectionId);
+
+        var httpContext = Context.GetHttpContext();
+        var guid = httpContext.Request.Query["guid"].ToString();
+        if (string.IsNullOrEmpty(guid))
         {
-            _logger = logger;
+            guid = Context.ConnectionId;
+        }
+        else
+        {
+            _clientsWithGuid[Context.ConnectionId] = guid;
         }
 
-        public override Task OnConnectedAsync()
+        // Asocia el GUID con el ConnectionId y almacénalo en _connectedClients
+        _connectedClients[guid] = Context.ConnectionId;
+
+        return base.OnConnectedAsync();
+    }
+
+    public string? GetConnectionIdByGuid(string guid)
+    {
+
+        return _connectedClients.TryGetValue(guid, out var connectionId) ? connectionId : null;
+
+    }
+    public List<string> GetOtherConnectedClientsGuids()
+    {
+        var currentConnectionId = Context.ConnectionId;
+        var currentGuid = _clientsWithGuid.ContainsKey(currentConnectionId) ? _clientsWithGuid[currentConnectionId] : null;
+
+        return _clientsWithGuid
+            .Where(x => x.Value != currentGuid)
+            .Select(x => x.Value)
+            .ToList();
+
+    }
+    public override Task OnDisconnectedAsync(Exception? exception)
+    {
+        _logger.LogInformation("Cliente desconectado: {ConnectionId}", Context.ConnectionId);
+
+        // Encuentra el GUID asociado con el ConnectionId y elimínalo del diccionario
+        var conectionId = _connectedClients.FirstOrDefault(x => x.Value == Context.ConnectionId).Key;
+        var guid = _clientsWithGuid.FirstOrDefault(x => x.Key == Context.ConnectionId).Key;
+        if (conectionId != null)
         {
-            _logger.LogInformation("Cliente conectado: {ConnectionId}", Context.ConnectionId);
-
-            var httpContext = Context.GetHttpContext();
-            var guid = httpContext.Request.Query["guid"].ToString();
-            if (string.IsNullOrEmpty(guid))
+            _connectedClients.Remove(conectionId);
+            if (guid != null)
             {
-                guid = Context.ConnectionId;
+                _clientsWithGuid.Remove(guid);
             }
-            else
-            {
-                _clientsWithGuid[Context.ConnectionId] = guid;
-            }
-
-            // Asocia el GUID con el ConnectionId y almacénalo en _connectedClients
-            _connectedClients[guid] = Context.ConnectionId;
-
-            return base.OnConnectedAsync();
         }
 
-        public string? GetConnectionIdByGuid(string guid)
+        return base.OnDisconnectedAsync(exception);
+    }
+
+    public async Task SendMessageToClient(string guid, string message)
+    {
+        if (_connectedClients.TryGetValue(guid, out var targetConnectionId))
         {
+            _logger.LogInformation("Enviando mensaje de {Sender} a {Receiver}: {Message}",
+                Context.ConnectionId, targetConnectionId, message);
 
-            return _connectedClients.TryGetValue(guid, out var connectionId) ? connectionId : null;
-
+            await Clients.Client(targetConnectionId).SendAsync("ReceiveMessage", Context.ConnectionId, message);
         }
-        public List<string> GetOtherConnectedClientsGuids()
+        else
         {
-            var currentConnectionId = Context.ConnectionId;
-            var currentGuid = _clientsWithGuid.ContainsKey(currentConnectionId) ? _clientsWithGuid[currentConnectionId] : null;
-
-            return _clientsWithGuid
-                .Where(x => x.Value != currentGuid)
-                .Select(x => x.Value)
-                .ToList();
-
-        }
-        public override Task OnDisconnectedAsync(Exception? exception)
-        {
-            _logger.LogInformation("Cliente desconectado: {ConnectionId}", Context.ConnectionId);
-
-            // Encuentra el GUID asociado con el ConnectionId y elimínalo del diccionario
-            var conectionId = _connectedClients.FirstOrDefault(x => x.Value == Context.ConnectionId).Key;
-            var guid = _clientsWithGuid.FirstOrDefault(x => x.Key == Context.ConnectionId).Key;
-            if (conectionId != null)
-            {
-                _connectedClients.Remove(conectionId);
-                if (guid != null)
-                {
-                    _clientsWithGuid.Remove(guid);
-                }
-            }
-
-            return base.OnDisconnectedAsync(exception);
-        }
-
-        public async Task SendMessageToClient(string guid, string message)
-        {
-            if (_connectedClients.TryGetValue(guid, out var targetConnectionId))
-            {
-                _logger.LogInformation("Enviando mensaje de {Sender} a {Receiver}: {Message}",
-                    Context.ConnectionId, targetConnectionId, message);
-
-                await Clients.Client(targetConnectionId).SendAsync("ReceiveMessage", Context.ConnectionId, message);
-            }
-            else
-            {
-                await Clients.Client(Context.ConnectionId).SendAsync("ReceiveMessage", Context.ConnectionId, misFunciones.Mensajes.GenerateMessaje("El Cliente Destino No esta Conectado"));
-                _logger.LogWarning("Intento de envío fallido: {Target} no está conectado", guid);
-            }
+            await Clients.Client(Context.ConnectionId).SendAsync("ReceiveMessage", Context.ConnectionId, misFunciones.Mensajes.GenerateMessaje("El Cliente Destino No esta Conectado"));
+            _logger.LogWarning("Intento de envío fallido: {Target} no está conectado", guid);
         }
     }
+}
 
