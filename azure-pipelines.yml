@@ -29,5 +29,4 @@ steps:
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:PublishProfile=$(publishProfile) /p:Configuration=$(buildConfiguration) /p:Platform=$(buildPlatform) /p:Password=$(FTP_PASSWORD)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+   
