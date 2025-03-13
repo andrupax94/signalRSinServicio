@@ -11,6 +11,7 @@ variables:
 steps:
 - task: PublishPipelineArtifact@1
   inputs:
+    
     targetPath: '$(Build.ArtifactStagingDirectory)\published'
     artifact: 'PublishedApp'
     publishLocation: 'pipeline'
