@@ -17,7 +17,7 @@ pool:
 
 steps:
 - powershell: |
-    Write-Host "El ID del último build es: $(lastBuildId)"
+    Write-Host "El ID del último build es:$[resources.pipelines.buildPipeline]"
   displayName: 'Mostrar variable lastBuildId'
 # Descarga el artefacto del último build del primer pipeline
 - task: DownloadPipelineArtifact@2 
