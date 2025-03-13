@@ -4,13 +4,13 @@ resources:
   pipelines:
     - pipeline: buildPipeline  # Referencia al primer pipeline
       source: 'andrupax94.signalRSinServicio' # Nombre del primer pipeline
-      trigger: true  # Opcional: Ejecuta automáticamente este pipeline después del primero
+      trigger: true
 
 variables:
   FTP_SERVER: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
   FTP_USERNAME: 'serviciointermedio\$serviciointermedio'
   remoteDirectory: '/site/wwwroot'
-  lastBuildId: $[resources.pipelines.buildPipeline.outputs['GuardarID.lastBuildId']] # Obtiene el ID del último build del primer pipeline
+  lastBuildId: $[resources.pipelines.buildPipeline.outputs['lastBuildId']] # Obtiene el ID del último build del primer pipeline
 
 pool:
   vmImage: 'windows-latest'
