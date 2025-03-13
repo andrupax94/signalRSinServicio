@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "signalRSinServicio", "signa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "test\Test.csproj", "{8F77AB7A-7B26-4CDF-B828-47ADE2C89EBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "misFunciones", "..\misFunciones\misFunciones\misFunciones.csproj", "{9316874E-0C71-409F-9EDC-AB7294FA9925}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8F77AB7A-7B26-4CDF-B828-47ADE2C89EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F77AB7A-7B26-4CDF-B828-47ADE2C89EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F77AB7A-7B26-4CDF-B828-47ADE2C89EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9316874E-0C71-409F-9EDC-AB7294FA9925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9316874E-0C71-409F-9EDC-AB7294FA9925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9316874E-0C71-409F-9EDC-AB7294FA9925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9316874E-0C71-409F-9EDC-AB7294FA9925}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
