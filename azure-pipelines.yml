@@ -8,7 +8,8 @@ variables:
   solution: '**/signalRSinServicio.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  publishProfile: 'FTPProfile.pubxml' # Cambia esto por tu perfil .pubxml
+  publishProfile: 'FTPProfile.pubxml'
+  FTP_PASSWORD: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi'
 
 steps:
 # Inicia el repositorio y los submódulos
@@ -27,6 +28,15 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true  /p:PublishProfile=$(publishProfile)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:PublishUrl=$(Build.ArtifactStagingDirectory)\published'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
+    username: 'serviciointermedio\$serviciointermedio'
+    password: 'cPGZyyzqFkzrzlbzb4ko7EXyhWFzwukFxeGFDtQyKbw9r7su5MKL8cgtZWFi' # Usa una variable secreta en lugar de exponer la contraseña
+    rootDirectory: '$(Build.ArtifactStagingDirectory)\published'
+    remoteDirectory: '/site/wwwroot'
+    trustSSL: true
