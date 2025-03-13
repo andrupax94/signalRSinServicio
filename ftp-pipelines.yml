@@ -6,7 +6,6 @@ pool:
 variables:
   FTP_SERVER: 'ftps://waws-prod-yt1-003.ftp.azurewebsites.windows.net'
   FTP_USERNAME: 'serviciointermedio\$serviciointermedio'
-  
   remoteDirectory: '/site/wwwroot'
 
 steps:
@@ -15,8 +14,7 @@ steps:
   inputs:
     buildType: specific
     buildVersionToDownload: latest
-    specificBuildWithTriggering: false
-  
+
     artifactName: 'PublishedApp'
     targetPath: '$(Pipeline.Workspace)\PublishedApp'
 
