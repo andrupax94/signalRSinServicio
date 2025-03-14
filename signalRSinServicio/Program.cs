@@ -47,25 +47,7 @@ public class Program
                 });
         });
 
-        // Configuración de autenticación JWT
-        var key = Encoding.ASCII.GetBytes("tu-clave-secreta-super-segura");
-        builder.Services.AddAuthentication(x =>
-        {
-            x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-        .AddJwtBearer(x =>
-        {
-            x.RequireHttpsMetadata = false;
-            x.SaveToken = true;
-            x.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            };
-        });
+      
 
         var app = builder.Build();
 
@@ -75,8 +57,8 @@ public class Program
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
-        // app.UseCors("AllowAll");
-        app.UseCors();
+         app.UseCors("AllowAll");
+       // app.UseCors();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
@@ -91,7 +73,6 @@ public class Program
         app.Run();
     }
 }
-
 
 public class MyHub : Hub
 {
