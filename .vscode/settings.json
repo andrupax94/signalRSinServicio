@@ -99,5 +99,25 @@
         "**/Properties": false,
         "**/*.csproj.user": false,
         "**/*.sln": false
-    }
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#19b2fa",
+        "activityBar.background": "#19b2fa",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#bb0481",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#19b2fa",
+        "statusBar.background": "#0597db",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#19b2fa",
+        "statusBarItem.remoteBackground": "#0597db",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#0597db",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#0597db99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#0597db"
 }
